@@ -1,0 +1,8 @@
+Improvements (July 14, 2017):
+- Remove the white line in the middle
+- Add gyroscope maybe?
+- Darken the background or the red line to make it invisible
+- Maybe add two steps if can't make invisible?
+- In vs ex (RE: Counter-clockwise - In LE: Clockwise - Ex)
+- Assume placed on firm surface
+- Red lense over right eye, green lense over left eye - Maybe add settings option?
