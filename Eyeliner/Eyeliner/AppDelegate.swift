@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     static let KEY_LEFTR = "LEFT0";
     static let KEY_LEFTG = "LEFT1";
-    static let KEY_LEFTB = "LEFTB";
+    static let KEY_LEFTB = "LEFT2";
     
     static let KEY_BG = "BACKGROUND_COLOR";
     
@@ -74,13 +74,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaults = UserDefaults.standard;
         let changed = defaults.bool(forKey: AppDelegate.KEY_DEFAULTSET);
         if(!changed){
-            defaults.set(Float(255), forKey: AppDelegate.KEY_RIGHTR);
+            defaults.set(Float(190), forKey: AppDelegate.KEY_RIGHTR);
             defaults.set(Float(0), forKey: AppDelegate.KEY_RIGHTG);
             defaults.set(Float(0), forKey: AppDelegate.KEY_RIGHTB);
             
             defaults.set(Float(0), forKey: AppDelegate.KEY_LEFTR);
-            defaults.set(Float(255), forKey: AppDelegate.KEY_LEFTG);
-            defaults.set(Float(0), forKey: AppDelegate.KEY_LEFTB);
+            defaults.set(Float(63), forKey: AppDelegate.KEY_LEFTG);
+            defaults.set(Float(126), forKey: AppDelegate.KEY_LEFTB);
             
             defaults.set(Float(38), forKey: AppDelegate.KEY_BG);
          

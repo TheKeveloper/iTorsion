@@ -47,6 +47,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var leftView: UIView!
     @IBOutlet weak var bgView: UIView!
     
+    @IBOutlet weak var btnRestoreDefaults: UIButton!
     var txtActive : UITextField? = nil;
     
     var toolBar : UIToolbar?;
@@ -134,7 +135,29 @@ class SettingsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    @IBAction func btnRestoreDefaults_Touch(_ sender: Any) {
+        let alert = UIAlertController(title: "Restore defaults", message: "Are you sure you want to restore to default settings?", preferredStyle: .alert);
+        
+        alert.addAction(UIAlertAction(title: "Restore Defaults", style: .default, handler:
+            {action in
+                self.bgValue = CGFloat(38);
+                self.rightValues[0] = CGFloat(190);
+                self.rightValues[1] = CGFloat(0);
+                self.rightValues[2] = CGFloat(0);
+                
+                self.leftValues[0] = CGFloat(0);
+                self.leftValues[1] = CGFloat(63);
+                self.leftValues[2] = CGFloat(126);
+                
+                self.updateUI();
+                self.edited = true;
+        }));
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil));
+        
+        self.present(alert, animated: true, completion: nil);
+    }
+    
     @IBAction func btnMain_Touch(_ sender: Any) {
         
         //Checks if edited. If not, go directly to the main menu.
@@ -171,10 +194,6 @@ class SettingsViewController: UIViewController {
         for i in 0 ..< rightValues.count{
             rightValues[i] = CGFloat(defaults.float(forKey: "RIGHT" + String(describing: i)));
             leftValues[i] = CGFloat(defaults.float(forKey: "LEFT" + String(describing: i)));
-            rightTexts[i]!.text = String.init(describing: Int(rightValues[i]));
-            leftTexts[i]!.text = String.init(describing: Int(leftValues[i]));
-            leftScrolls[i]!.value = Float(leftValues[i]);
-            rightScrolls[i]!.value = Float(rightValues[i]);
             
             rightTexts[i]!.inputAccessoryView = toolBar;
             leftTexts[i]!.inputAccessoryView = toolBar;
@@ -183,9 +202,24 @@ class SettingsViewController: UIViewController {
         //Gets background values
         bgValue = CGFloat(defaults.float(forKey: AppDelegate.KEY_BG));
         self.view.backgroundColor = UIColor(red: bgValue / 255, green: bgValue / 255, blue: bgValue / 255, alpha: 1);
+        
+        updateUI();
+        txtBG!.inputAccessoryView = toolBar;
+    }
+    
+    func updateUI() {
+        for i in 0 ..< rightValues.count{
+            rightTexts[i]!.text = String.init(describing: Int(rightValues[i]));
+            leftTexts[i]!.text = String.init(describing: Int(leftValues[i]));
+            leftScrolls[i]!.value = Float(leftValues[i]);
+            rightScrolls[i]!.value = Float(rightValues[i]);
+        }
+        
+        //Gets background values
         sliderBG.setValue(Float(bgValue), animated: false);
         txtBG.text! = String.init(describing: Int(Float(bgValue)));
-        txtBG!.inputAccessoryView = toolBar;
+        
+        updateColors();
     }
     
     //Saves the data
@@ -229,6 +263,7 @@ class SettingsViewController: UIViewController {
             texts[i]?.frame.size.width = AppDelegate.screenSize.width * 0.13;
             texts[i]?.center.x = AppDelegate.screenSize.width * 0.8;
         }
+        btnRestoreDefaults.center.x = AppDelegate.screenSize.width * 0.45;
     }
     
     
